@@ -1,0 +1,36 @@
+{
+    "about": {
+        "title": "About",
+        "desc": "Hello I'm Tomek"
+    },
+    "projects": {
+        "title": "Portfolio",
+        "desc": "My projects",
+        "projects": [
+            {
+                "id": "one",
+                "title": "Project One",
+                "desc": "Lorem ipsum dolores 1"
+            },
+            {
+                "id": "two",
+                "title": "Project Two",
+                "desc": "Lorem ipsum dolores 2"
+            },
+            {
+                "id": "three",
+                "title": "Project Three",
+                "desc": "Lorem ipsum dolores 3"
+            },
+            {
+                "id": "four",
+                "title": "Project Four",
+                "desc": "Lorem ipsum dolores 4"
+            }
+        ]
+    },
+    "contact": {
+        "title": "Contact",
+        "desc": "pastezzz@gmail.com"
+    }
+}

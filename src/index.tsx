@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'purecss/build/pure.css'
+import 'purecss/build/grids-responsive-min.css'
+import './index.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
