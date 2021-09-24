@@ -1,11 +1,10 @@
 body {
-  margin: 30px;
   background-color: #eeeeee;
   color: rgb(32, 32, 32);
 }
 
 a {
-  color: blue;
+  color: #DA4167;
   text-decoration: none;
 }
 
@@ -19,8 +18,33 @@ a:hover {
   height: 10px;
 }
 
-.nav-button {
-  font-size: 2em;
-  font-weight: bolder;
-  text-decoration: none;
+.naviation-container {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.content-container {
+  margin: 190px 30px 30px 30px;
+  z-index: 500;
+}
+
+.trailsText {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  line-height: 80px;
+  color: black;
+  font-size: 5em;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.trailsText>div {
+  padding-right: 0.05em;
+  overflow: hidden;
 }

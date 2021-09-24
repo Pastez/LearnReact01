@@ -5,6 +5,8 @@ export interface IBaseSection {
 
 interface IProjectsItem extends IBaseSection {
     id: string;
+    color: string;
+    image: string;
 }
 
 interface IProjects extends IBaseSection {
