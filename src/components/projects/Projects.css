@@ -1,0 +1,60 @@
+.pl-background {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.pl-fade-enter {
+    transform: scale(2);
+}
+
+.pl-fade-enter-active {
+    transform: scale(1);
+    transition: all 400ms ease-out;
+}
+
+.pl-fade-exit {
+    opacity: 1;
+}
+
+.pl-fade-exit-active {
+    opacity: 0;
+    transition: all 500ms;
+    
+}
+
+.pi-container {
+    color: white;
+    text-align: center;
+}
+
+.pi-header {
+    font-size: 10em;
+    font-weight: bolder;
+    padding: 5px 40px 5px 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    filter: blur(1px);
+}
+
+.pr-desc {
+    font-size: 3em;
+}
+
+.pd-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    background-size: cover;
+    z-index: 10;
+}
+
+.pd-content {
+    font-size: 3em;
+    position: absolute;
+    padding-top: 60px;
+    z-index: 100000;
+    line-height: 0.3em;
+}

@@ -1,9 +1,8 @@
-import { RouteComponentProps } from "react-router";
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
-import IDataModel from "../../data/IDataModel";
+import { IBaseSection } from "../../data/IDataModel";
 import { useRef } from "react";
 
-const About: React.FC<IDataModel & RouteComponentProps<{ name?: string }>> = (props) => {
+const About: React.FC<{about:IBaseSection}> = (props) => {
     const parallax = useRef<IParallax>(null!)
     setTimeout(() => {
         parallax?.current?.scrollTo(1);

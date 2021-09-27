@@ -3,7 +3,7 @@ export interface IBaseSection {
     desc: string;
 }
 
-interface IProjectsItem extends IBaseSection {
+export interface IProjectsItem extends IBaseSection {
     id: string;
     color: string;
     image: string;

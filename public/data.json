@@ -9,30 +9,30 @@
         "projects": [
             {
                 "id": "one",
-                "title": "Asia :*",
+                "title": "Project One",
                 "desc": "Lorem ipsum dolores 1",
-                "color": "#16457A",
+                "color": "#798AA5",
                 "image": "p1.png"
             },
             {
                 "id": "two",
                 "title": "Project Two",
                 "desc": "Lorem ipsum dolores 2",
-                "color": "#03C0B1",
+                "color": "#C76600",
                 "image": "p2.png"
             },
             {
                 "id": "three",
                 "title": "Project Three",
                 "desc": "Lorem ipsum dolores 3",
-                "color": "#69BE49",
+                "color": "#FFFDB7",
                 "image": "p3.png"
             },
             {
                 "id": "four",
                 "title": "Project Four",
                 "desc": "Lorem ipsum dolores 4",
-                "color": "#6D1783",
+                "color": "#A6248F",
                 "image": "p4.png"
             }
         ]

@@ -1,14 +1,14 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import featchJsonData from './data/FetchJsonData';
-import Projects from './components/projects/Projects';
-import IDataModel, { IBaseSection } from './data/IDataModel';
 import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import featchJsonData from './data/FetchJsonData';
+import IDataModel, { IBaseSection } from './data/IDataModel';
 import Navigation from './components/navigation/Navigation';
 import About from './components/about/About';
 import React from 'react';
 import { useTrail } from '@react-spring/core';
 import { animated } from '@react-spring/web';
+import ProjectIndex from './components/projects/ProjectsIndex';
 
 const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
   const items = React.Children.toArray(children)
@@ -33,7 +33,7 @@ const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
 const BasePage: React.FC<IBaseSection> = (data) => {
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Trail open={true}>
         <span>{data.title}</span>
         <span>{data.desc}</span>
@@ -45,7 +45,21 @@ const BasePage: React.FC<IBaseSection> = (data) => {
 }
 
 function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/about" />
+        </Route>
+        <Route>
+          <AppMain />
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
 
+function AppMain() {
   const [data, setData] = useState<IDataModel>();
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
@@ -66,23 +80,21 @@ function App() {
 
   let content;
   if (dataLoaded && data) {
-    content = <Router>
+    content =<>
       <div className="naviation-container"><Navigation /></div>
       <div className="content-container">
-        <Route path="/" exact>
-          <Redirect to="/about" />
-        </Route>
-        <Route path="/about" render={(props) => {
-          return <About {...props} {...data} />
-        }}>
+        <Switch>
+          <Route path="/about" children={<About about={data.about} />}/>
+          <Route path="/contact"><BasePage {...data.contact} /></Route>
+          <Route path="/projects" render={(props) => {
+            return <ProjectIndex {...props} projects={data.projects.projects} />
+          }} />
+          <Route>
+            <h1>Error !</h1>
           </Route>
-        <Route path="/projects/:name?" render={(props) => {
-          return <Projects {...props} {...data} />
-        }}>
-        </Route>
-        <Route path="/contact"><BasePage {...data.contact} /></Route>
+        </Switch>
       </div>
-    </Router>
+      </>
   } else {
     content = <span>loading data</span>
   }

@@ -1,15 +1,12 @@
-import IDataModel from '../../data/IDataModel';
-import React, { useEffect, useRef } from 'react';
-import { RouteComponentProps } from 'react-router'
-import { NavLink } from 'react-router-dom';
+import './Projects.css';
+import { IProjectsItem } from '../../data/IDataModel';
+import React, { useRef } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { animated, useSpring } from '@react-spring/web';
-import IComponentInteractionProps from '../../data/IComponentInteractionProps';
+import ProjectItem from './ProjectItem';
 
-const Projects: React.FC<IDataModel & IComponentInteractionProps & RouteComponentProps<{name?:string}>> = (props) => {
+const Projects: React.FC<{ projects: IProjectsItem[]}> = (props) => {
     const projects = props.projects;
-    const projectName = props.match.params.name;
-    const goBack = projectName ? <NavLink to="/projects">Back</NavLink> : <></>;
 
     const styles = useSpring({
         to: [
@@ -20,31 +17,24 @@ const Projects: React.FC<IDataModel & IComponentInteractionProps & RouteComponen
     
     const parallax = useRef<IParallax>(null!)
     
-    const paralaxProjectList = projects.projects
-        .filter(item => !projectName || item.id === props.match.params.name)
+    const paralaxProjectList = projects
         .map((item, index) => (
-            <div key={item.id}>
+            <div key={item.id} style={{backgroundColor: 'black'}}>
                 {/* <ParallaxLayer offset={index} speed={0} style={{ zIndex: index + 100, background: `linear-gradient(322deg, #ffffff00 0%, ${item.color} 100%)` }} /> */}
-                <ParallaxLayer offset={index} speed={0} style={{zIndex: 100-index}}>
-                    <animated.div style={{ ...styles, width: '100%', height:'100%', backgroundImage: `url('images/${item.image}')`, backgroundSize: 'cover' }}/>
+                <ParallaxLayer offset={index} speed={0} style={{ zIndex: 100 - index, overflow: 'hidden' }}>
+                    <animated.div className="pl-background" style={{ ...styles, backgroundImage: `url('images/${item.image}')`, backgroundPositionX: '33.3333%' }} />
                 </ParallaxLayer>
                 <ParallaxLayer
                 offset={index}
-                speed={1.5}
-                style={{ zIndex:200, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '13em', color: 'white', fontWeight:'bolder' }}>
-                    <p>{item.title}</p>
-                </ParallaxLayer>
-                <ParallaxLayer
-                    offset={index+0.1}
-                    speed={2.5}
-                    style={{ zIndex:300, display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '5em', color: 'white' }}>
-                    <p>{item.desc}</p>
+                speed={0.4}
+                style={{ zIndex:200, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <ProjectItem data={item}/>
                 </ParallaxLayer>
                 <ParallaxLayer
                     offset={index + 0.15}
-                    speed={3.0}
-                    style={{ zIndex: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <a style={{ fontSize: '2em', color: 'white'}} onClick={() => { parallax.current.scrollTo(index + 1)}}>Next</a>
+                    speed={0.2}
+                    style={{ zIndex: 150, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <a href={`#${item.id}`} style={{ fontSize: '2em', color: 'white'}} onClick={() => { parallax.current.scrollTo(index + 1)}}>Next</a>
                 </ParallaxLayer>
             </div>
         ));
@@ -53,7 +43,6 @@ const Projects: React.FC<IDataModel & IComponentInteractionProps & RouteComponen
         <Parallax ref={parallax} pages={paralaxProjectList.length} style={{ top: '0', left: '0' }}>
         {paralaxProjectList}
     </Parallax>
-        {goBack}
     </>
 }
 
