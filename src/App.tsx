@@ -8,7 +8,9 @@ import About from './components/about/About';
 import React from 'react';
 import { useTrail } from '@react-spring/core';
 import { animated } from '@react-spring/web';
+import { ParallaxProvider } from 'react-scroll-parallax';
 import ProjectIndex from './components/projects/ProjectsIndex';
+import LargeImageButton from './components/largeImageButton/LargeImageButton';
 
 const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
   const items = React.Children.toArray(children)
@@ -33,29 +35,36 @@ const Trail: React.FC<{ open: boolean }> = ({ open, children }) => {
 const BasePage: React.FC<IBaseSection> = (data) => {
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Trail open={true}>
-        <span>{data.title}</span>
-        <span>{data.desc}</span>
-        <span>{data.desc}</span>
-        <span>{data.desc}</span>
-      </Trail>
-    </div>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Trail open={true}>
+          <span>{data.title}</span>
+          <span>{data.desc}</span>
+          <span>{data.desc}</span>
+          <span>{data.desc}</span>
+        </Trail>
+      </div>
+    </>
   )
 }
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/about" />
-        </Route>
-        <Route>
-          <AppMain />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      <Router>
+        <div className="naviation-container"><Navigation /></div>
+        <ParallaxProvider>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/about" />
+            </Route>
+            <Route>
+              <AppMain />
+            </Route>
+          </Switch>
+        </ParallaxProvider>
+      </Router>
+    </>
   );
 }
 
@@ -65,7 +74,6 @@ function AppMain() {
 
   const getData = () => featchJsonData('/data.json')
     .then(response => {
-      console.log(response)
       return response.json();
     }).then(jsonData => {
       setData(jsonData)
@@ -80,11 +88,10 @@ function AppMain() {
 
   let content;
   if (dataLoaded && data) {
-    content =<>
-      <div className="naviation-container"><Navigation /></div>
+    content = <>
       <div className="content-container">
         <Switch>
-          <Route path="/about" children={<About about={data.about} />}/>
+          <Route path="/about" children={<About about={data.about} />} />
           <Route path="/contact"><BasePage {...data.contact} /></Route>
           <Route path="/projects" render={(props) => {
             return <ProjectIndex {...props} projects={data.projects.projects} />
@@ -94,7 +101,7 @@ function AppMain() {
           </Route>
         </Switch>
       </div>
-      </>
+    </>
   } else {
     content = <span>loading data</span>
   }

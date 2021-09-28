@@ -1,5 +1,5 @@
 import { IProjectsItem } from "../../data/IDataModel";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Projects from "./Projects";
 import ProjectDetails from "./ProjectDetails";
 import { useLocation } from "react-router";

@@ -1,0 +1,42 @@
+.rir-container {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
+    background-color: #cecece;
+    border-radius: 10px;
+}
+
+.rir-container > div{
+    width: 120%;
+    display: flex;
+    flex-wrap: wrap;perspective-origin: 25% 75%;
+    /* perspective-origin: 50% 50%; */
+    /* transform: perspective(900px) rotate3d(0.2, 0.1, 0.1, 8deg) translateX(-45%) translateY(-40%) translateZ(-700px); */
+    transform: rotateZ(10deg) translateX(-5%) translateY(-10%);
+}
+
+.rir-item {
+    position: relative;
+    /* border: 3px solid white; */
+    /* border-radius: 10px; */
+    overflow: hidden;
+    margin: 10px;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.3));
+}
+
+.rir-movable-container
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+}
+
+.rir-movable-container div{
+    width: 100%;
+    height: 50%;
+    background-size: cover;
+    background-position: center;
+}

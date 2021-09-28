@@ -1,50 +1,43 @@
-import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { IBaseSection } from "../../data/IDataModel";
-import { useRef } from "react";
+import { Parallax, ParallaxBanner } from 'react-scroll-parallax';
+import './About.css'
+import LargeImageButton from "../largeImageButton/LargeImageButton";
+import RandomImageRotatorContainer from "../randomImageRotator/RandomImageRotatorContainer";
 
-const About: React.FC<{about:IBaseSection}> = (props) => {
-    const parallax = useRef<IParallax>(null!)
-    setTimeout(() => {
-        parallax?.current?.scrollTo(1);
-    }, 500);
+const About: React.FC<{ about: IBaseSection }> = (props) => {
+    // setTimeout(() => {
+    //     parallax?.current?.scrollTo(1);
+    // }, 500);
     return <>
-        <Parallax ref={parallax} pages={2} style={{ top: '0', left: '0' }}>
-            <ParallaxLayer
-                
-                offset={0}
-                speed={2.5}
-                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '5em' }}>
-                <div style={{ paddingBottom: '5em' }}><p>{props.about.title}</p></div>
-            </ParallaxLayer>
+        <Parallax y={[-130, 80]}>
+            <RandomImageRotatorContainer width="400px" height="230px" count={10} urls={['/images/p1.png', '/images/p2.png', '/images/p3.png', '/images/p4.png' ] }/>
+        </Parallax>
+            <Parallax>
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', flexWrap: 'wrap' }}>
+                    <LargeImageButton index={1} title="Jakis Button" subtitle="First One" image="/images/p1.png" />
+                    <LargeImageButton index={2} title="Jakis Button" image="/images/p2.png" />
+                    <LargeImageButton index={3} title="Nowy button z dlugim tyulem" subtitle="i malym podtytulem" image="/images/p3.png" />
+                    <LargeImageButton index={4} title="Jakis Button" image="/images/p4.png" />
+                    <LargeImageButton index={5} title="Jakis Button" image="/images/p4.png" />
+                    <LargeImageButton index={6} title="Jakis Button" image="/images/p1.png" />
+                    <LargeImageButton index={7} title="Jakis Button" image="/images/p2.png" />
+                    <LargeImageButton index={8} title="Jakis Button" image="/images/p3.png" />
+                </div>
+            </Parallax>
+        <ParallaxBanner className="about-center-content" style={{ height: '100vh' }} layers={[
+            {
+                image: 'images/p2.png',
+                amount: 0.8,
 
-            <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#000000' }} />
-
-            <ParallaxLayer
-                offset={1}
-                speed={0.5}
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '10em'
-                }}>
-                <p>{props.about.desc}</p>
-            </ParallaxLayer>
-
-            <ParallaxLayer
-                offset={0}
-                speed={5}
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: '20em',
-                    color: '#111111',
-                    fontWeight: 'bolder'
-                }}>
-                <p>Hi!</p>
-            </ParallaxLayer>
+            },
+        ]}>
+            <div style={{ zIndex: 1000 }} className='about-large-header'>
+                <p>About</p>
+                <p style={{fontSize: '4em', fontWeight: 'bolder', margin: '0px'}}>{props.about.title}</p>
+            </div>
+        </ParallaxBanner>
+        <Parallax className="about-center-content about-hi" y={[-120, 120]}>
+            {props.about.desc}
         </Parallax>
     </>
 }
